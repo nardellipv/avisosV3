@@ -9,4 +9,17 @@ class Comment extends Model
 {
     /** @use HasFactory<\Database\Factories\CommentFactory> */
     use HasFactory;
+
+    protected $fillable = ['content', 'user_id', 'service_id'];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    
 }

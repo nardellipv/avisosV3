@@ -9,4 +9,12 @@ class Region extends Model
 {
     /** @use HasFactory<\Database\Factories\RegionFactory> */
     use HasFactory;
+
+    protected $fillable = ['name'];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+    
 }

@@ -9,4 +9,12 @@ class Image extends Model
 {
     /** @use HasFactory<\Database\Factories\ImageFactory> */
     use HasFactory;
+
+    protected $fillable = ['url', 'service_id'];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+    
 }
