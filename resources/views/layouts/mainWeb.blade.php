@@ -26,7 +26,8 @@
 
     <!-- Custom Font
     ================================================== -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,500i,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,500i,600,700,800,900&display=swap"
+        rel="stylesheet">
 
     <!-- CSS
     ================================================== -->
@@ -65,7 +66,9 @@
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             Start Frontpage Banner Section
         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-        @include('web.parts._banner')
+        @if (Request::is('/'))
+            @include('web.parts._banner')
+        @endif
 
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             Start Poular Categories Block
@@ -106,4 +109,5 @@
     <script src="{{ asset('assets/web/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/web/js/main.js') }}"></script><!-- main-js -->
 </body>
+
 </html>

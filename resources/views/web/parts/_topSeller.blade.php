@@ -1,10 +1,9 @@
-<div class="todos-block bg-snow ptb-100">
-    <div class="container ml-b-30">
+<div class="work-process-block ptb-100">
+<div class="container ml-b-45">
         <div class="row">
 
             <div class="col-12">
                 <div class="section-title text-center">
-                    <h4 class="title-sub">Top-Rated Local Businesses</h4>
                     <h2 class="title-main">Servicios Más Visitados</h2>
                     <div class="divider">
                         <span class="icon-star-full"></span>
