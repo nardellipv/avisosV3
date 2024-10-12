@@ -16,5 +16,10 @@ class Region extends Model
     {
         return $this->hasMany(User::class);
     }
-    
+
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
+
 }

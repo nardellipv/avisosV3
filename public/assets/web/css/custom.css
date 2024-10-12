@@ -1,0 +1,14 @@
+.service-img {
+    width: 100%;
+    height: 250px; /* Puedes ajustar el tamaño según tus necesidades */
+    object-fit: cover; /* Mantiene el aspecto sin distorsionar */
+}
+.same-size-topVisit {
+    height: 200px; /* Ajusta la altura según tus necesidades */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espaciado uniforme entre los elementos */
+    border: 1px solid #ddd; /* Opcional: agrega un borde para ver el área */
+    padding: 15px; /* Espaciado interno */
+    box-sizing: border-box; /* Incluye el padding en el cálculo de altura */
+}

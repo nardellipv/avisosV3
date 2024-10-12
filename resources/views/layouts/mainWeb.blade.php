@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="{{ asset('assets/web/css/fontawesome.all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/web/css/icomoon.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/web/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/web/css/custom.css') }}">
 
     <script src="{{ asset('assets/web/js/modernizr.min.js') }}"></script>
 </head>
