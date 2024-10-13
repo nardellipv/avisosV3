@@ -8,29 +8,14 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    // Definir el array de imágenes como una propiedad del controlador
-    protected $images = [
-        'assets/img/servicio1.jpg',
-        'assets/img/servicio2.jpg',
-        'assets/img/servicio3.jpg',
-        'assets/img/servicio4.jpg',
-        'assets/img/servicio5.jpg',
-        'assets/img/servicio6.jpg',
-    ];
-
-    // Método para seleccionar una imagen aleatoria
-    protected function getRandomImage()
-    {
-        return $this->images[array_rand($this->images)];
-    }
-
     // Obtener categorías y contar servicios
     protected function getCategories()
     {
-        return Service::selectRaw('categories.name, COUNT(services.id) as count')
+        return Service::selectRaw('categories.id, categories.name, COUNT(services.id) as count')
             ->join('categories', 'services.category_id', '=', 'categories.id')
-            ->groupBy('categories.name')
+            ->groupBy('categories.id', 'categories.name')
             ->get();
+
     }
 
     // Obtener los últimos servicios publicados
@@ -50,7 +35,7 @@ class ServiceController extends Controller
     public function list()
     {
         // Seleccionar una imagen aleatoria usando el método
-        $randomImage = $this->getRandomImage();
+        $randomImage = get_random_image();
 
         // Obtener servicios de forma aleatoria
         $services = Service::where('end_date', '>=', now())
@@ -72,24 +57,39 @@ class ServiceController extends Controller
         ));
     }
 
-    public function search(Request $request)
+    public function filter(Request $request)
     {
-        dd($request->all());
         // Seleccionar una imagen aleatoria usando el método
-        $randomImage = $this->getRandomImage();
+        $randomImage = get_random_image();
 
-        $search = $request->input('search');
+        // Access the category_id from the request
+        $categoryId = $request->input('category_id');
 
-        // Obtener servicios que coincidan con la búsqueda
-        $services = Service::where('title', 'LIKE', '%' . $search . '%')
-            ->orWhere('description', 'LIKE', '%' . $search . '%')
-            ->get();
+        // Check if categoryId is not null or empty
+        if (is_null($categoryId) || $categoryId === '') {
+            // Handle the case where category_id is not provided
+            return redirect()->back()->with('error', 'Category ID is required.');
+        }
 
-        // Obtener últimos servicios publicados y categorías
+        // Obtener servicios filtrados por category_id
+        $services = Service::where('category_id', $categoryId)
+            ->where('end_date', '>=', now())
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        // Obtener otros datos necesarios
         $lastPublished = $this->getLastPublished();
         $categories = $this->getCategories();
+        $regions = $this->getRegion();
 
-        // Retornar la vista de búsqueda con la imagen aleatoria y los resultados
-        return view('web.services.search', compact('services', 'randomImage', 'categories', 'lastPublished'));
+        // Retornar la vista con los servicios y otros datos
+        return view('web.services.listServices', compact(
+            'services',
+            'lastPublished',
+            'categories',
+            'randomImage',
+            'regions'
+        ));
     }
+
 }

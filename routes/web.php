@@ -6,5 +6,6 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('in
 
 
 Route::get('/listado', [App\Http\Controllers\ServiceController::class, 'list'])->name('service.list');
-Route::get('/listado/buscar', [App\Http\Controllers\ServiceController::class, 'search'])->name('service.search');
+Route::get('/listado/filtro', [App\Http\Controllers\ServiceController::class, 'filter'])->name('service.filter');
+
 

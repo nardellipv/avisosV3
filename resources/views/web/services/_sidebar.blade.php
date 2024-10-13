@@ -7,9 +7,12 @@
                 <ul>
                     @foreach ($categories as $category)
                         <li class="cat-item">
-                            <a href="#">{{ $category->name }}<span class="count">{{ $category->count }}</span></a>
+                            <a href="{{ route('service.filter', ['category_id' => $category->id]) }}">
+                                {{ $category->name }}<span class="count">{{ $category->count }}</span>
+                            </a>
                         </li>
                     @endforeach
+
                 </ul>
             </div>
         </aside>
